@@ -7,16 +7,13 @@
   </head>
 
   <body>
-    <jade id="hepek">
-      h1 Jade - node template engine
-      #container.col
-        if youAreUsingJade
-          p You are amazing
-        else
-          p Get on it!
-        p.
-          Jade is a terse and simple templating language with a
-          strong focus on performance and powerful features.
+    <jade id="messages">
+      h4 Chat name: chat
+            div.panel
+              for message in messages
+                p(class="tip" title= message.displayName)
+                  img(class="avatar" src= message.profilePicture)
+                  strong= message.message
     </jade>
   </body>
 </html>

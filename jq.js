@@ -4,7 +4,7 @@ jq = {
     var old_lines = text.split('\n');
     var lines = [];
     old_lines.forEach(function(f){
-      if (f.trim() != "")
+      if (f.trim() !== "")
         lines.push(f);
     });
     var begin = /^(\W*)\w/.exec(lines[0])[1];
@@ -29,20 +29,22 @@ jq = {
       });
     else
     {
+      if ($("#" + id).length == 0)
+        throw new Error("Element with ID: " + id + " doesn't exist");
       $("#" + id).hide();
       if (!jq.compiled[id])
         jq.compiled[id] = {};
       jq.compiled[id].templ = jade.compile(jq.textTransform($("#" + id).html()));
       console.debug('Compiled jade element ' + id);
-      if ($("#jade_" + id).length == 0)
+      if ($("#jade_" + id).length === 0)
       {
         $("#" + id).after("<div id='jade_" + id + "'></div>");
       }
       try {
         jq.reapply(id);
       } catch(err) {
-        console.warning('Couldn\'t display jade with id:', id);
-        console.warning('Probably needs some data');
+        console.warn('Couldn\'t display jade with id:', id);
+        console.warn('Probably needs some data');
       }
       return jq.compiled[id].templ;
     }
@@ -54,6 +56,8 @@ jq = {
       });
     else
     {
+      if ($("#" + id).length == 0)
+        throw new Error("Element with ID: " + id + " doesn't exist");
       if (!jq.compiled[id]) jq.rebuild(id);
       var fn = jq.compiled[id].templ;
       if (typeof data !== "undefined")
@@ -61,7 +65,7 @@ jq = {
       $("#jade_" + id).html(fn(jq.compiled[id].data));
     }
   }
-}
+};
 
 $(document).ready(function(){
   jq.rebuild();

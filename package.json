@@ -1,0 +1,11 @@
+{
+  "name": "jade-query",
+  "version": "0.1.0",
+  "dependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-concat": "*"
+  }
+}
