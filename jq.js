@@ -29,7 +29,7 @@ jq = {
       });
     else
     {
-      if ($("#" + id).length == 0)
+      if ($("#" + id).length === 0)
         throw new Error("Element with ID: " + id + " doesn't exist");
       $("#" + id).hide();
       if (!jq.compiled[id])
@@ -56,7 +56,7 @@ jq = {
       });
     else
     {
-      if ($("#" + id).length == 0)
+      if ($("#" + id).length === 0)
         throw new Error("Element with ID: " + id + " doesn't exist");
       if (!jq.compiled[id]) jq.rebuild(id);
       var fn = jq.compiled[id].templ;
