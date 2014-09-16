@@ -20,6 +20,24 @@ jq.reapply('id_of_element', {some_variable_name: some_variable_data})
 ```
 *Note:* please note that in order for variables to be passed successfuly to jade element, you must use **dictionary** as second variable (like shown above).
 
+Why would I use it ?
+--------------------
+It makes async stuff damn easier. Check out `finance.html` in `examples` directory.
+
+Use jade inside jade ?
+----------------------
+Currently it is under development, but in near future it will be possible.
+
+Use jade-query from server-side jade ?
+--------------------------------------
+Yes it is possible.
+```jade
+h1 this is server-side jade
+jade#some_jade_div.
+    h2 this is client-side jade
+```
+*Note:* Please note the dot at the end of second line. It is neccessary in order to tell server-side jade to literally write everything you write inside that jade element.
+
 Simple example
 --------------
 ```html
