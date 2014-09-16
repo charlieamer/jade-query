@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../bower_components/jade/jade.js"></script>
+		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="../jq.js"></script>
+		<script>
+      var cur_names = ["USD", "EUR", "GBP", "AUD"];
+      jq.reapply("currencies", {currency_names: cur_names});
+      var pairs = [];
+      cur_names.forEach(function(currency1){
+        cur_names.forEach(function(currency2){
+          pairs.push(currency1 + currency2);
+        });
+      });
+      var query = "SELECT * FROM yahoo.finance.xchange WHERE pair IN ('" + pairs.join("', '") + "')";
+      var url = "https://query.yahooapis.com/v1/public/yql";
+      var send_data = {
+        q: query,
+        format: "json",
+        env: "store://datatables.org/alltableswithkeys"
+      }
+      function resend() {
+        $.get(url, send_data, function(data) {
+          var values = {};
+          data.query.results.rate.forEach(function(rate){
+            values[rate.id] = rate.Rate;
+          });
+          jq.reapply("currency_table", {currency_names: cur_names, currency_values: values});
+          setTimeout(resend, 60000);
+        });
+      }
+      resend();
+		</script>
+	</head>
+	<body>
+		<h1>Yahoo! finance jade-query example</h1><br>
+		<em>Note: </em> in order for examples to work, you need to issue <b>bower install</b> command.<br>
+		<jade id="currencies">
+			h3 Using currencies:
+			each currency in currency_names
+			  p= currency
+	  </jade>
+    <jade id="currency_table">
+      h2 Currency Table:
+      if currency_values
+        table(border="1")
+          tr
+            td
+            each currency in currency_names
+              td
+                = currency
+          each currency1 in currency_names
+            tr
+              td
+                = currency1
+              each currency2 in currency_names
+                td
+                  = currency_values[currency1 + currency2]
+        em Note: this table updates automaticly every 60 seconds.
+      else
+        em Please wait...
+    </jade>
+	</body>
+</html>
