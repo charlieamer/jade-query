@@ -10,10 +10,12 @@ First, you need to include `jade` runtime in yor browser (available [here](https
     h1 Hello from jade
 </jade>
 ```
-*Note:* please note that for now you need to put some id to your jade element.
+- *Note:* this works stright away in your browser without the need of recompilation.
+- *Note:* please note that for now you need to put some id to your jade element.
 
 What about javascript runtime, variables and stuff ?
 ----------------------------------------------------
+Although <jade> elements get compiled *automaticly* at the DOM ready event, you might still want to pass your own elements to jade in order to control <jade> elements.
 In order to pass some variables to jade element. you should use `jq.reapply` function from your javascript:
 ```javascript
 jq.reapply('id_of_element', {some_variable_name: some_variable_data})
@@ -52,6 +54,7 @@ Simple example
       Jade is a terse and simple templating language with a strong focus on performance and powerful features.
 </jade>
 <script>
+  // this is not really necessary, but just to show example how to send variables to jade
   jq.reapply('content', {youAreUsingJade: true});
 </script>
 ```
