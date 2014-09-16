@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: ['jq.js', 'jade.js'],
+        src: ['jq.js'],
         dest: 'bin/jade-query.js'
       }
     },

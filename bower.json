@@ -1,0 +1,35 @@
+{
+  "name": "jade-query",
+  "version": "0.1.0",
+  "homepage": "https://github.com/charlieamer/jade-query",
+  "authors": [
+    "charlieamer <amer_zavlan@live.com>"
+  ],
+  "description": "A very easy to use library for rendering jade in browser",
+  "main": "jq.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jade",
+    "query",
+    "help",
+    "easy",
+    "browser",
+    "compile",
+    "library",
+    "jquery"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+	  "jquery": "*",
+	  "jade": "*"
+  }
+}
