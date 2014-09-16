@@ -1,6 +1,6 @@
 jade-query
 ==========
-*A library that makes jade possible in browser by just typing <jade>...</jade>*
+*A library that makes jade possible in browser by just typing `<jade>...</jade>`*
 
 How to use
 ----------
