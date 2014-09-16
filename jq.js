@@ -43,13 +43,20 @@ jq = {
       try {
         jq.reapply(id);
       } catch(err) {
-        console.warn('Couldn\'t display jade with id:', id);
-        console.warn('Probably needs some data');
+        console.warn('Couldn\'t automaticly display jade with id:', id);
+        console.warn('Probably needs some data. You can ignore this warning.');
       }
       return jq.compiled[id].templ;
     }
   },
   reapply: function reapply(id, data) {
+    if (!jq.ready)
+    {
+	    $(document).ready(function(){
+        jq.reapply(id, data);
+      });
+      return;
+    }
     if (!id)
       $("jade").each(function(index, element){
         reapply($(element).attr('id'), data);
@@ -64,9 +71,11 @@ jq = {
         jq.compiled[id].data = data;
       $("#jade_" + id).html(fn(jq.compiled[id].data));
     }
-  }
+  },
+  ready: false
 };
 
 $(document).ready(function(){
+  jq.ready = true;
   jq.rebuild();
 });
