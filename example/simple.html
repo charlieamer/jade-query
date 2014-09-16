@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../bower_components/jade/jade.js"></script>
+		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="../jq.js"></script>
+	</head>
+	<body>
+		<h1>Simplest jade-query example</h1><br>
+		<em>Note: </em> in order for examples to work, you need to issue <b>bower install</b> command.<br>
+    <jade id='content'>
+      h1 Jade - node template engine
+      #container.col
+        if youAreUsingJade
+          p You are amazing
+        else
+          p Get on it!
+        p.
+          Jade is a terse and simple templating language with a
+          strong focus on performance and powerful features.
+    </jade>
+    <script>
+      jq.reapply('content', {youAreUsingJade: true});
+    </script>
+	</body>
+</html>
+
