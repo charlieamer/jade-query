@@ -1,21 +1,21 @@
 jade-query
 ==========
-*A library that makes jade possible in browser by just typing `<jade>...</jade>`*
+*A library that makes jade possible in browser by just typing `<x-jade>...</x-jade>`*
 
 How to use
 ----------
 First, you need to include `jade` runtime in yor browser (available [here](https://raw.githubusercontent.com/visionmedia/jade/master/runtime.js)), then you need `jquery` (available [here](http://code.jquery.com/jquery-2.1.1.min.js)), and then include `jq.js` from this repository, and you are good to go. In order to use jade inside browser simply put. You must include `jquery` and `jade.js` **before** `jq.js`.
 ```html
-<jade id="hello">
+<x-jade id="hello">
     h1 Hello from jade
-</jade>
+</x-jade>
 ```
 - *Note:* this works stright away in your browser without the need of recompilation.
 - *Note:* please note that for now you need to put some id to your jade element.
 
 What about javascript runtime, variables and stuff ?
 ----------------------------------------------------
-Although <jade> elements get compiled *automaticly* at the DOM ready event, you might still want to pass your own elements to jade in order to control <jade> elements.
+Although `<x-jade>` elements get compiled *automaticly* at the DOM ready event, you might still want to pass your own elements to jade in order to control `<x-jade>` elements.
 In order to pass some variables to jade element. you should use `jq.reapply` function from your javascript:
 ```javascript
 jq.reapply('id_of_element', {some_variable_name: some_variable_data})
@@ -35,7 +35,7 @@ Use jade-query from server-side jade ?
 Yes it is possible.
 ```jade
 h1 this is server-side jade
-jade#some_jade_div.
+x-jade#some_jade_div.
     h2 this is client-side jade
 ```
 *Note:* Please note the dot at the end of second line. It is neccessary in order to tell server-side jade to literally write everything you write inside that jade element.
@@ -43,7 +43,7 @@ jade#some_jade_div.
 Simple example
 --------------
 ```html
-<jade id='content'>
+<x-jade id='content'>
   h1 Jade - node template engine
   #container.col
     if youAreUsingJade
@@ -52,7 +52,7 @@ Simple example
       p Get on it!
     p.
       Jade is a terse and simple templating language with a strong focus on performance and powerful features.
-</jade>
+</x-jade>
 <script>
   // this is not really necessary, but just to show example how to send variables to jade
   jq.reapply('content', {youAreUsingJade: true});
@@ -73,10 +73,9 @@ strong focus on performance and powerful features.
 
 What you should know
 --------------------
-- The <jade> element still exists in browser DOM, but on document ready, we tell every <jade> element to hide
-- When you do `jq.reapply('some_id')`, `jq` will put another div element after <jade> element called `jade_some_id`. To be more precise:
+- When you do `jq.reapply('some_id')`, `jq` will put another div element after <x-jade> element called `jade_some_id`. To be more precise:
 ```html
-<jade id="some_id">
+<x-jade id="some_id">
     ...
 </jade>
 <div id="jade_some_id">
