@@ -36,12 +36,12 @@
 	<body>
 		<h1>Yahoo! finance jade-query example</h1><br>
 		<em>Note: </em> in order for examples to work, you need to issue <b>bower install</b> command.<br>
-		<jade id="currencies">
+		<x-jade id="currencies">
 			h3 Using currencies:
 			each currency in currency_names
 			  p= currency
-	  </jade>
-    <jade id="currency_table">
+	  </x-jade>
+    <x-jade id="currency_table">
       h2 Currency Table:
       if currency_values
         table(border="1")
@@ -60,6 +60,6 @@
         em Note: this table updates automaticly every 60 seconds.
       else
         em Please wait...
-    </jade>
+    </x-jade>
 	</body>
 </html>
