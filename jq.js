@@ -17,7 +17,7 @@ jq = {
   },
   rebuild: function rebuild(id) {
     if (!id)
-      $("jade").each(function(index, element){
+      $("x\\-jade").each(function(index, element){
         id = $(element).attr('id');
         if (!id)
         {
@@ -34,14 +34,14 @@ jq = {
       $("#" + id).hide();
       if (!jq.compiled[id])
         jq.compiled[id] = {};
-      jq.compiled[id].templ = jade.compile(jq.textTransform($("#" + id).html()));
-      console.debug('Compiled jade element ' + id);
+      console.debug('Compiling jade element ' + id);
+      jq.compiled[id].templ = jade.compile(jq.textTransform($("#" + id).text()));
       if ($("#jade_" + id).length === 0)
       {
         $("#" + id).after("<div id='jade_" + id + "'></div>");
       }
       try {
-        jq.reapply(id);
+        jq.reapply(id, undefined, true);
       } catch(err) {
         console.warn('Couldn\'t automaticly display jade with id:', id);
         console.warn('Probably needs some data. You can ignore this warning.');
@@ -49,7 +49,7 @@ jq = {
       return jq.compiled[id].templ;
     }
   },
-  reapply: function reapply(id, data) {
+  reapply: function reapply(id, data, nothrow) {
     if (!jq.ready)
     {
 	    $(document).ready(function(){
@@ -58,7 +58,7 @@ jq = {
       return;
     }
     if (!id)
-      $("jade").each(function(index, element){
+      $("x\\-jade").each(function(index, element){
         reapply($(element).attr('id'), data);
       });
     else
@@ -69,13 +69,23 @@ jq = {
       var fn = jq.compiled[id].templ;
       if (typeof data !== "undefined")
         jq.compiled[id].data = data;
-      $("#jade_" + id).html(fn(jq.compiled[id].data));
+      if (nothrow)
+        $("#jade_" + id).html(fn(jq.compiled[id].data));
+      else {
+        try {
+          $("#jade_" + id).html(fn(jq.compiled[id].data));
+        } catch(err) {
+          console.error("Error applying template",id,":",err);
+        }
+      }
     }
   },
   ready: false
 };
 
 $(document).ready(function(){
+  document.registerElement("x-jade");
   jq.ready = true;
   jq.rebuild();
 });
+
