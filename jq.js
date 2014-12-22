@@ -7,7 +7,7 @@ jq = {
       if (f.trim() !== "")
         lines.push(f);
     });
-    var begin = /^(\W*)\w/.exec(lines[0])[1];
+    var begin = /^(\s*)\S/.exec(lines[0])[1];
     var rep = new RegExp("^" + begin);
     var ret = [];
     lines.forEach(function(f) {

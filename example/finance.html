@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<script src="../bower_components/jade/jade.js"></script>
 		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="../jq.js"></script>
@@ -34,32 +35,34 @@
 		</script>
 	</head>
 	<body>
-		<h1>Yahoo! finance jade-query example</h1><br>
-		<em>Note: </em> in order for examples to work, you need to issue <b>bower install</b> command.<br>
-		<x-jade id="currencies">
-			h3 Using currencies:
-			each currency in currency_names
-			  p= currency
-	  </x-jade>
-    <x-jade id="currency_table">
-      h2 Currency Table:
-      if currency_values
-        table(border="1")
-          tr
-            td
-            each currency in currency_names
-              td
-                = currency
-          each currency1 in currency_names
+    <div class="container">
+      <h1>Yahoo! finance jade-query example</h1><br>
+      <em>Note: </em> in order for examples to work, you need to issue <b>bower install</b> command.<br>
+      <x-jade id="currencies">
+        h3 Using currencies:
+        each currency in currency_names
+          p= currency
+      </x-jade>
+      <x-jade id="currency_table">
+        h2 Currency Table:
+        if currency_values
+          table(border="1")
             tr
               td
-                = currency1
-              each currency2 in currency_names
+              each currency in currency_names
                 td
-                  = currency_values[currency1 + currency2]
-        em Note: this table updates automaticly every 60 seconds.
-      else
-        em Please wait...
-    </x-jade>
+                  = currency
+            each currency1 in currency_names
+              tr
+                td
+                  = currency1
+                each currency2 in currency_names
+                  td
+                    = currency_values[currency1 + currency2]
+          em Note: this table updates automaticly every 60 seconds.
+        else
+          em Please wait...
+      </x-jade>
+    </div>
 	</body>
 </html>
