@@ -4,7 +4,7 @@ jade-query
 
 How to use
 ----------
-First, you need to include `jade` runtime in yor browser (available [here](https://raw.githubusercontent.com/visionmedia/jade/master/runtime.js)), then you need `jquery` (available [here](http://code.jquery.com/jquery-2.1.1.min.js)), and then include `jq.js` from this repository, and you are good to go. In order to use jade inside browser simply put. You must include `jquery` and `jade.js` **before** `jq.js`.
+First, you need to include `jade` standalone in yor browser (available [here](https://cdnjs.cloudflare.com/ajax/libs/jade/1.9.0/jade.min.js)) (*Note: since internationalization, jade 1.10.0 and above doesn't work for now. Version in the link is 1.9.0*), then you need `jquery` (available [here](http://code.jquery.com/jquery-2.1.1.min.js)), and then include `jq.js` from this repository, and you are good to go. You must include `jquery` and `jade.js` **before** `jq.js`. In order to use jade inside browser simply put:
 ```html
 <x-jade id="hello">
     h1 Hello from jade
@@ -15,7 +15,7 @@ First, you need to include `jade` runtime in yor browser (available [here](https
 
 What about javascript runtime, variables and stuff ?
 ----------------------------------------------------
-Although `<x-jade>` elements get compiled *automaticly* at the DOM ready event, you might still want to pass your own elements to jade in order to control `<x-jade>` elements.
+Although `<x-jade>` elements get compiled *automaticly* at the DOM ready event, you might still want to pass your own variables to jade in order to control `<x-jade>` elements.
 In order to pass some variables to jade element. you should use `jq.reapply` function from your javascript:
 ```javascript
 jq.reapply('id_of_element', {some_variable_name: some_variable_data})
